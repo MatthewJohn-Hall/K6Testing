@@ -5,6 +5,8 @@ export const options = {
   duration: '30s',
 };
 export default function() {
-  http.get('https://test-api.k6.io/public/crocodiles/ ');
-  sleep(1);
-}
+  const res = http.get('https://test-api.k6.io/public/crocodiles/ ');
+    check(res, {
+      'is status 200': (r) => r.status === 200,
+    });
+ }
