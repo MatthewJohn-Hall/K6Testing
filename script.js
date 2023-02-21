@@ -2,7 +2,10 @@ import http from 'k6/http';
 import { check } from 'k6';
 import { sleep } from 'k6';
 
-
+export const options = {
+  vus: 10,
+  duration: '60s',
+};
 
 
 
@@ -31,11 +34,15 @@ export default function() {
                     'is status 200': (r) => r.status === 200,
                 });
 
-    const res4 = http.get('https://test-api.k6.io/public/crocodiles/'+ (Math.floor(Math.random() * 9)+1) + '/');
+    const res4 = http.get('https://test-api.k6.io/public/crocodiles/'+ (Math.floor(Math.random() * 9)) + '/');
         check(res4, {
             'is status 200': (r) => r.status === 200,
         });
 
-        console.log(idNum);
-
 }
+//1500 checks run on 10vu's in 15s
+//5000 checks run on 1000ve's in 1min.
+//Hit a ceiling of some sort evidently. Limited by the local machine or something else?
+//4300 checks for 100vu's in 1min
+//6000 checks for 10vu's in 1min
+//consistent 97% failure rate.
