@@ -14,28 +14,28 @@ export default function() {
         'is status 200': (r) => r.status === 200,
         });
 
-    const obj = JSON.parse(res.body);
+    const resBody = JSON.parse(res.body);
+    const idNum = new Array();
 
+    for (let i = 0; i < resBody.length; i++){
+     idNum.push(resBody[i].id);
+    }
 
-    const res2 = http.get('https://test-api.k6.io/public/crocodiles/'+ obj[Math.floor(Math.random() * obj.length)].id + '/');
+    const res2 = http.get('https://test-api.k6.io/public/crocodiles/'+ resBody[Math.floor(Math.random() * resBody.length)].id + '/');
             check(res2, {
                 'is status 200': (r) => r.status === 200,
             });
 
+    const res3 = http.get('https://test-api.k6.io/public/crocodiles/'+ idNum[Math.floor(Math.random() * idNum.length)] + '/');
+                check(res3, {
+                    'is status 200': (r) => r.status === 200,
+                });
 
-    const res3 = http.get('https://test-api.k6.io/public/crocodiles/'+ (Math.floor(Math.random() * 9)+1) + '/');
-        check(res2, {
+    const res4 = http.get('https://test-api.k6.io/public/crocodiles/'+ (Math.floor(Math.random() * 9)+1) + '/');
+        check(res4, {
             'is status 200': (r) => r.status === 200,
         });
 
+        console.log(idNum);
 
-
-    console.log(obj[Math.floor(Math.random() * obj.length)].id);
-
-    console.log(obj.length)
-
-
-
-
-
- }
+}
