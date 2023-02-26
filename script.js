@@ -3,8 +3,19 @@ import { check } from 'k6';
 import { sleep } from 'k6';
 
 export const options = {
-  vus: 10,
-  duration: '60s',
+    Stages: [
+        { duration: '30s', target: 1 },
+        { duration: '30s', target: 10 },
+        { duration: '30s', target: 100 },
+        /*{ duration: '30s', target: 1000 },
+        { duration: '30s', target: 5000 },
+        { duration: '1s', target: 10 },
+        { duration: '10s', target: 10 },
+        { duration: '15s', target: 10 },
+        { duration: '30s', target: 10 },
+        { duration: '60s', target: 10 },*/
+    ],
+
 };
 
 
@@ -41,7 +52,7 @@ export default function() {
 
 }
 //1500 checks run on 10vu's in 15s
-//5000 checks run on 1000ve's in 1min.
+//5000 checks run on 1000vue's in 1min.
 //Hit a ceiling of some sort evidently. Limited by the local machine or something else?
 //4300 checks for 100vu's in 1min
 //6000 checks for 10vu's in 1min
