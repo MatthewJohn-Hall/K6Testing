@@ -40,7 +40,7 @@ export default function() {
     const res = http.get(Base_URL);
         check(res, {check200: (r) => r.status === 200,});
 
-    const res2 = http.get(Base_URL + (Math.floor(Math.random() * 9)) + '/');
+    const res2 = http.get(Base_URL + (Math.floor(Math.random() * 8) + 1) + '/');
         check(res2, {check200: (r) => r.status === 200,});
 
     const resBody = JSON.parse(res.body);
