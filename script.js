@@ -45,6 +45,7 @@ export const options = {
 const Base_URL = 'https://test-api.k6.io/public/crocodiles/';
 const Base_URLReg = 'https://test-api.k6.io/';
 const check200 = 'is status 200';
+const check201 = 'is status 201';
 
 export  function Public() {
 
@@ -83,7 +84,7 @@ export function Private() {
       });
       console.log("user register code:" + res.status);
       console.log("user body:" + res.body);
-      check(res, {check200: (r) => r.status === 201,});
+      check(res, {check201: (r) => r.status === 201,});
 
     let data2 = {
                     username: "UserName"+EmailRandomiser,
